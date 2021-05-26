@@ -12,10 +12,27 @@ public class CollisonHandeler : MonoBehaviour
    AudioSource audioSource;
 
    bool isTransitioning = false;
+   bool collisionIsDisabled = false;
    private void Start() {
        audioSource = GetComponent<AudioSource>();
    }
+   private void Update() {
+       RespondToDebugKeys();
+   }
+
+   void RespondToDebugKeys() {
+       if (Input.GetKeyDown(KeyCode.L))
+       {
+           LoadNextLevel();
+       }
+       else if(Input.GetKeyDown(KeyCode.C)){
+           collisionIsDisabled = !collisionIsDisabled;
+       }
+   }
  private void OnCollisionEnter(Collision other) {
+     if (isTransitioning || collisionIsDisabled)
+     {return;
+     }
      
      switch(other.gameObject.tag){
 
@@ -32,17 +49,17 @@ public class CollisonHandeler : MonoBehaviour
          break;
 
      }
+     
  }
 
  void StartCrashSequence(){
-     if(!isTransitioning){
+    isTransitioning = true;
          audioSource.Stop();
          deathPartical.Play();
      GetComponent<Movment>().enabled = false;
      audioSource.PlayOneShot(deathSound);
      Invoke("RestartLevel",delay);
-     }
-     isTransitioning = true;
+     
  }
 
  void RestartLevel(){
@@ -60,13 +77,12 @@ public class CollisonHandeler : MonoBehaviour
  }
 
  void StartSuccessSequence(){
-     if(!isTransitioning){
+   isTransitioning = true;
          audioSource.Stop();
          successPartical.Play();
      audioSource.PlayOneShot(successLevel);
 GetComponent<Movment>().enabled = false;
      Invoke("LoadNextLevel",delay);
-     }
-     isTransitioning = true;
+    
  }
 }

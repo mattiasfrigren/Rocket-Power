@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   momentVector: {x: 0, y: 9, z: 0}
-  period: 4
+  period: 2
 --- !u!108 &705507994 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 760385174225574320, guid: a7d982bee3c74a04cbabbdc2b99b6fdf, type: 3}
@@ -1900,7 +1900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   momentVector: {x: 8, y: 0, z: 0}
-  period: 8
+  period: 2
 --- !u!1001 &2130170510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2056,7 +2056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7310221069547354498, guid: 209bed9eabaa5664a8f45949d50feec2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.09
+      value: 8.516604
       objectReference: {fileID: 0}
     - target: {fileID: 7310221069547354498, guid: 209bed9eabaa5664a8f45949d50feec2, type: 3}
       propertyPath: m_LocalPosition.z

@@ -33,40 +33,76 @@ public class Movment : MonoBehaviour
 
     void ProcessRotation(){
      
-     if(Input.GetKey(KeyCode.A)){
-         ApplyRotation(rotationSpeed);
-         if(!rightEnginepartical.isPlaying){
-            rightEnginepartical.Play();
-         }    
-       }
-       else if(Input.GetKey(KeyCode.D)){
-      ApplyRotation(-rotationSpeed);
-      if(!leftEnginepartical.isPlaying){
-         leftEnginepartical.Play();
-      }
-       }
-       else{
-          rightEnginepartical.Stop();
-          leftEnginepartical.Stop();
-       }
+     if(Input.GetKey(KeyCode.A))
+        {
+            RotateLeft();
+        }
+        else if(Input.GetKey(KeyCode.D))
+        {
+            RotateRight();
+        }
+        else
+        {
+            StopEffects();
+        }
     }
-    void ProcessUp(){
+
+     void ProcessUp(){
      
-     if(Input.GetKey(KeyCode.Space)){
-        
-     rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
-     if(!audioSource.isPlaying){
-        audioSource.PlayOneShot(mainEngine);
-     }
-     if(!mainEnginepartical.isPlaying){
-     mainEnginepartical.Play();
-     }
-       }
-       else{
-          audioSource.Stop();
-          mainEnginepartical.Stop();
-       }
+     if(Input.GetKey(KeyCode.Space))
+        {
+            StartThrusting();
+        }
+        else
+        {
+            stopThursting();
+        }
+
+    }
+
+    private void StopEffects()
+    {
+        rightEnginepartical.Stop();
+        leftEnginepartical.Stop();
+    }
+
+    private void RotateRight()
+    {
+        ApplyRotation(-rotationSpeed);
+        if (!leftEnginepartical.isPlaying)
+        {
+            leftEnginepartical.Play();
+        }
+    }
+
+    private void RotateLeft()
+    {
+        ApplyRotation(rotationSpeed);
+        if (!rightEnginepartical.isPlaying)
+        {
+            rightEnginepartical.Play();
+        }
+    }
+
    
+
+    private void stopThursting()
+    {
+        audioSource.Stop();
+        mainEnginepartical.Stop();
+    }
+
+    private void StartThrusting()
+    {
+        rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(mainEngine);
+        }
+        if (!mainEnginepartical.isPlaying)
+        {
+            mainEnginepartical.Play();
+        }
     }
 
     void ApplyRotation( float rotationThisFrame){
